@@ -12,7 +12,9 @@ export default function PromptCard(props) {
       <Link to={`/prompt/${props.id}`}>
         <button>Read</button>
       </Link>
-      <button>Write</button>
+      <Link to={`/write/${props.id}`}>
+        <button>Write</button>
+      </Link>
     </div>
   );
 }

@@ -7,10 +7,8 @@ export const storePrompts = (prompts) => ({
 });
 
 export const getPrompts = () => async (dispatch, getState) => {
-  //console.log("getprompts called");
   try {
     const response = await Axios.get(`${apiUrl}/prompts`);
-    //console.log("Response:", response.data);
     dispatch(storePrompts(response.data));
   } catch (e) {
     console.log(e);

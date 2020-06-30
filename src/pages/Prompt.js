@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { Container } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getSinglePrompt } from "../store/prompts/actions";
@@ -16,14 +17,17 @@ export default function Prompt() {
 
   const render = () => {
     return (
-      <div>
-        <h1>Title: {prompt.name}</h1>
-        <p>{prompt.description}</p>
-        {prompt.stories.map((story) => (
-          <StoryCard key={story.id} {...story} />
-        ))}
-      </div>
+      <Container>
+        <div>
+          <h1>Title: {prompt.name}</h1>
+          <p>{prompt.description}</p>
+          {prompt.stories.map((story) => (
+            <StoryCard key={story.id} {...story} />
+          ))}
+        </div>
+      </Container>
     );
   };
+
   return <div>{Object.keys(prompt).length ? render() : <p>loading</p>}</div>;
 }

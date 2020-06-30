@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Container, Form, Button } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getSinglePrompt } from "../store/prompts/actions";
+import { getSinglePrompt, postStory } from "../store/prompts/actions";
 import { selectSinglePrompt } from "../store/prompts/selectors";
 
 export default function WriteStory() {
@@ -15,8 +15,8 @@ export default function WriteStory() {
 
   function submitForm(event) {
     event.preventDefault();
-    console.log("name:", name);
-    console.log("description:", description);
+    const userId = 1;
+    dispatch(postStory(description, name, parseInt(id), userId));
   }
 
   useEffect(() => {
@@ -37,7 +37,6 @@ export default function WriteStory() {
                 onChange={(event) => setName(event.target.value)}
                 type="text"
                 placeholder="What is your story called?"
-                required
               />
             </Form.Group>
             <Form.Group controlId="formBasicTextArea">

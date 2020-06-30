@@ -35,3 +35,21 @@ export const getSinglePrompt = (id) => async (dispatch, getState) => {
     }
   }
 };
+
+export const postStory = (description, name, promptId, userId) => async (
+  dispatch,
+  getState
+) => {
+  try {
+    // console.log("Story", { description, name, promptId, userId });
+    const response = await Axios.post(`${apiUrl}/stories/new`, {
+      description,
+      name,
+      promptId,
+      userId,
+    });
+    console.log("response is:", response);
+  } catch (e) {
+    console.log(e);
+  }
+};

@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 export default function PromptCard(props) {
   return (
@@ -8,8 +9,12 @@ export default function PromptCard(props) {
       <p>
         <i>stories:</i> {props.stories.length}
       </p>
-      <button>Read</button>
-      <button>Write</button>
+      <Link to={`/prompt/${props.id}`}>
+        <button>Read</button>
+      </Link>
+      <Link to={`/write/${props.id}`}>
+        <button>Write</button>
+      </Link>
     </div>
   );
 }

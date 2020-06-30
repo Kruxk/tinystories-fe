@@ -10,6 +10,8 @@ const navStyle = {
   textDecoration: "none",
   color: "black",
   borderRadius: "1em",
+  fontFamily: "Roboto",
+  fontWeight: "500",
 };
 
 export default function Navbar() {

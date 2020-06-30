@@ -1,11 +1,25 @@
 import React, { useState } from "react";
 import { Form, Button } from "react-bootstrap";
+import { signUp } from "../../store/user/actions";
+import { useDispatch } from "react-redux";
 
 export default function SignupForm() {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [picture, setPicture] = useState("");
   const [password, setPassword] = useState("");
+  const dispatch = useDispatch();
+
+  const handleSignup = (e) => {
+    e.preventDefault();
+
+    dispatch(signUp(name, email, password, picture));
+
+    setPassword("");
+    setEmail("");
+    setPicture("");
+    setName("");
+  };
 
   return (
     <div
@@ -57,7 +71,7 @@ export default function SignupForm() {
           />
         </Form.Group>
 
-        <Button variant="primary" type="submit">
+        <Button variant="primary" type="submit" onClick={handleSignup}>
           Signup
         </Button>
       </Form>

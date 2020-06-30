@@ -1,10 +1,22 @@
 import React, { useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { login } from "../../store/user/actions";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const dispatch = useDispatch();
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+
+    dispatch(login(email, password));
+
+    setEmail("");
+    setPassword("");
+  };
 
   return (
     <div
@@ -38,7 +50,7 @@ export default function Login() {
           />
         </Form.Group>
         <Form.Group>
-          <Button variant="primary" type="submit">
+          <Button variant="primary" type="submit" onClick={handleLogin}>
             Login
           </Button>
         </Form.Group>

@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import { Container, Form, Button } from "react-bootstrap";
+import { useDispatch } from "react-redux";
+import { postPrompt } from "../store/prompts/actions";
 
 export default function WritePrompt() {
+  const dispatch = useDispatch();
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
 
@@ -9,7 +12,7 @@ export default function WritePrompt() {
     event.preventDefault();
     const userId = 2;
 
-    console.log("prompt:", { userId, description, name });
+    dispatch(postPrompt(userId, description, name));
   }
 
   return (

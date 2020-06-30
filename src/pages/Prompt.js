@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Container } from "react-bootstrap";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getSinglePrompt } from "../store/prompts/actions";
 import { selectSinglePrompt } from "../store/prompts/selectors";
@@ -24,6 +24,9 @@ export default function Prompt() {
           {prompt.stories.map((story) => (
             <StoryCard key={story.id} {...story} />
           ))}
+          <Link to={`/write/${id}`}>
+            <button> Write a Story</button>
+          </Link>
         </div>
       </Container>
     );

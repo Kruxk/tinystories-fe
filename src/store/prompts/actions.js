@@ -1,6 +1,7 @@
 import Axios from "axios";
 import { apiUrl } from "../../config/constants";
 import { selectPrompts } from "./selectors";
+import { selectToken } from "../user/selectors";
 
 export const storePrompts = (prompts) => ({
   type: "STORE_PROMPTS",
@@ -56,13 +57,22 @@ export const postStory = (description, name, promptId, userId) => async (
   dispatch,
   getState
 ) => {
+  const token = selectToken(getState());
+  if (token === null) return;
+
   try {
-    const response = await Axios.post(`${apiUrl}/stories/new`, {
-      description,
-      name,
-      promptId,
-      userId,
-    });
+    const response = await Axios.post(
+      `${apiUrl}/stories/new`,
+      {
+        description,
+        name,
+        promptId,
+        userId,
+      },
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
     console.log("response is:", response);
   } catch (e) {
     console.log(e);

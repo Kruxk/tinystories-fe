@@ -43,6 +43,15 @@ export default function Navbar() {
         <NavLink
           activeStyle={{ background: "#E0E0E0" }}
           style={navStyle}
+          to="/prompt/new"
+        >
+          Write Prompt
+        </NavLink>
+      )}
+      {token !== null && (
+        <NavLink
+          activeStyle={{ background: "#E0E0E0" }}
+          style={navStyle}
           to="/profile"
         >
           Profile

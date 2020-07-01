@@ -1,23 +1,38 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Container, Form, Button } from "react-bootstrap";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { postPrompt } from "../store/prompts/actions";
+import { useHistory, Link } from "react-router-dom";
+import { selectToken, selectUser } from "../store/user/selectors";
 
 export default function WritePrompt() {
   const dispatch = useDispatch();
+  const user = useSelector(selectUser);
+  const token = useSelector(selectToken);
+  const history = useHistory();
+
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
+  const [formSubmit, setFormSubmit] = useState(false);
 
   function submitForm(event) {
     event.preventDefault();
-    const userId = 2;
-
-    dispatch(postPrompt(userId, description, name));
+    dispatch(postPrompt(user.id, description, name));
+    setFormSubmit(true);
   }
 
-  return (
-    <Container>
-      <h1>Write a prompt</h1>
+  function anotherPrompt() {
+    setFormSubmit(false);
+  }
+
+  useEffect(() => {
+    if (token === null) {
+      history.push("/login");
+    }
+  }, [dispatch, history, token]);
+
+  const formToRender = () => {
+    return (
       <Form>
         <Form.Group controlId="formBasicName">
           <Form.Label>Title of your Prompt:</Form.Label>
@@ -46,6 +61,26 @@ export default function WritePrompt() {
           </Button>
         </Form.Group>
       </Form>
+    );
+  };
+
+  const succesRender = () => {
+    return (
+      <div>
+        <h3>Prompt submitted!</h3>
+        <p>thanks for submitting your prompt</p>
+        <button onClick={anotherPrompt}> Write another prompt </button>
+        <Link to={`/`}>
+          <button> See all prompts </button>
+        </Link>
+      </div>
+    );
+  };
+
+  return (
+    <Container>
+      <h1>Write a prompt</h1>
+      {formSubmit ? succesRender() : formToRender()}
     </Container>
   );
 }

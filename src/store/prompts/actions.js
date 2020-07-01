@@ -41,12 +41,21 @@ export const postPrompt = (userId, description, name) => async (
   dispatch,
   getState
 ) => {
+  const token = selectToken(getState());
+  if (token === null) return;
+
   try {
-    const response = await Axios.post(`${apiUrl}/prompts/new`, {
-      userId,
-      description,
-      name,
-    });
+    const response = await Axios.post(
+      `${apiUrl}/prompts/new`,
+      {
+        userId,
+        description,
+        name,
+      },
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
     console.log("response is:", response);
   } catch (e) {
     console.log(e);

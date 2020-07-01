@@ -7,7 +7,7 @@ export const LOG_OUT = "LOG_OUT";
 
 const loginSucces = (userWithToken) => {
   return {
-    type: "LOGIN_SUCCES",
+    type: LOGIN_SUCCES,
     payload: userWithToken,
   };
 };

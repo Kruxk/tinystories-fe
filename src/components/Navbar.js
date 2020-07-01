@@ -1,5 +1,9 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { selectToken } from "../store/user/selectors";
+import { Button } from "react-bootstrap";
+import { logOut } from "../store/user/actions";
 
 const navStyle = {
   paddingLeft: "1.5em",
@@ -15,6 +19,9 @@ const navStyle = {
 };
 
 export default function Navbar() {
+  const token = useSelector(selectToken);
+  const dispatch = useDispatch();
+
   return (
     <div
       style={{
@@ -39,13 +46,22 @@ export default function Navbar() {
       >
         Profile
       </NavLink>
-      <NavLink
-        activeStyle={{ background: "#E0E0E0" }}
-        style={navStyle}
-        to="/login"
-      >
-        Login
-      </NavLink>
+      {token === null ? (
+        <NavLink
+          activeStyle={{ background: "#E0E0E0" }}
+          style={navStyle}
+          to="/login"
+        >
+          Login/Signup
+        </NavLink>
+      ) : (
+        <Button
+          style={{ ...navStyle, backgroundColor: "white", border: "none" }}
+          onClick={(e) => dispatch(logOut())}
+        >
+          Logout
+        </Button>
+      )}
     </div>
   );
 }

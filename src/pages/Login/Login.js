@@ -1,13 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Form, Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { Link, useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../store/user/actions";
+import { selectToken } from "../../store/user/selectors";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
+  const token = useSelector(selectToken);
+  const history = useHistory();
+
+  useEffect(() => {
+    if (token !== null) {
+      history.push("/");
+    }
+  }, [token, history]);
 
   const handleLogin = (e) => {
     e.preventDefault();

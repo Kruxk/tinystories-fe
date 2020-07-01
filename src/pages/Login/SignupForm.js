@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Form, Button } from "react-bootstrap";
 import { signUp } from "../../store/user/actions";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { selectToken } from "../../store/user/selectors";
+import { useHistory } from "react-router-dom";
 
 export default function SignupForm() {
   const [email, setEmail] = useState("");
@@ -9,6 +11,14 @@ export default function SignupForm() {
   const [picture, setPicture] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
+  const token = useSelector(selectToken);
+  const history = useHistory();
+
+  useEffect(() => {
+    if (token !== null) {
+      history.push("/");
+    }
+  }, [token, history]);
 
   const handleSignup = (e) => {
     e.preventDefault();

@@ -1,27 +1,34 @@
 import React, { useEffect, useState } from "react";
 import { Container, Form, Button } from "react-bootstrap";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getSinglePrompt, postStory } from "../store/prompts/actions";
 import { selectSinglePrompt } from "../store/prompts/selectors";
+import { selectUser, selectToken } from "../store/user/selectors";
 
 export default function WriteStory() {
   const { id } = useParams();
   const dispatch = useDispatch();
   const prompt = useSelector(selectSinglePrompt);
+  const user = useSelector(selectUser);
+  const token = useSelector(selectToken);
+  const history = useHistory();
 
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
 
   function submitForm(event) {
     event.preventDefault();
-    const userId = 1;
-    dispatch(postStory(description, name, parseInt(id), userId));
+    dispatch(postStory(description, name, parseInt(id), user.id));
   }
 
   useEffect(() => {
-    dispatch(getSinglePrompt(id));
-  }, [dispatch, id]);
+    if (token !== null) {
+      dispatch(getSinglePrompt(id));
+    } else {
+      history.push("/login");
+    }
+  }, [dispatch, history, id, token]);
 
   const render = () => {
     return (

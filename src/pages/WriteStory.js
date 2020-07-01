@@ -18,8 +18,6 @@ export default function WriteStory() {
   const [description, setDescription] = useState("");
   const [formSubmit, setFormSubmit] = useState(false);
 
-  console.log("form submitted?", formSubmit);
-
   function submitForm(event) {
     event.preventDefault();
     dispatch(postStory(description, name, parseInt(id), user.id));
@@ -38,7 +36,7 @@ export default function WriteStory() {
     }
   }, [dispatch, history, id, token]);
 
-  const render = () => {
+  const formRender = () => {
     return (
       <div>
         <Form>
@@ -95,7 +93,7 @@ export default function WriteStory() {
       {formSubmit ? (
         succesRender()
       ) : Object.keys(prompt).length ? (
-        render()
+        formRender()
       ) : (
         <p>loading</p>
       )}

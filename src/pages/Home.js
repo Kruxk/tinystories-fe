@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getPrompts } from "../store/prompts/actions";
 import { selectPrompts } from "../store/prompts/selectors";
 import PromptCard from "../components/PromptCard";
+import { Container } from "react-bootstrap";
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -15,5 +16,5 @@ export default function Home() {
   const promptsToRender = () =>
     prompts.map((prompt) => <PromptCard key={prompt.id} {...prompt} />);
 
-  return <div>{promptsToRender()}</div>;
+  return <Container>{promptsToRender()}</Container>;
 }

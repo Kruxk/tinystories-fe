@@ -1,6 +1,8 @@
 import axios from "axios";
 import { apiUrl } from "../../config/constants";
 import { selectStories } from "./selectors";
+import { selectToken } from "../user/selectors";
+import Axios from "axios";
 
 export const STORE_STORIES = "STORE_STORIES";
 
@@ -22,5 +24,16 @@ export const fetchStories = () => async (dispatch, getState) => {
     }
   } catch (error) {
     console.log(error);
+  }
+};
+
+export const deleteStory = (id) => async (dispatch, getState) => {
+  //console.log("deleting story with id:", id);
+  const token = selectToken(getState());
+  if (token === null) return;
+  try {
+    const response = await Axios.delete(`${apiUrl}/stories/delete/${id}`);
+  } catch (e) {
+    console.log(e);
   }
 };

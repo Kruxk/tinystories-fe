@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { selectToken } from "../store/user/selectors";
 import { Button } from "react-bootstrap";
@@ -21,6 +21,7 @@ const navStyle = {
 export default function Navbar() {
   const token = useSelector(selectToken);
   const dispatch = useDispatch();
+  const history = useHistory();
 
   return (
     <div
@@ -68,7 +69,10 @@ export default function Navbar() {
       ) : (
         <Button
           style={{ ...navStyle, backgroundColor: "white", border: "none" }}
-          onClick={(e) => dispatch(logOut())}
+          onClick={(e) => {
+            dispatch(logOut());
+            history.push("/");
+          }}
         >
           Logout
         </Button>

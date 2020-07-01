@@ -39,13 +39,15 @@ export default function Navbar() {
       >
         Home
       </NavLink>
-      <NavLink
-        activeStyle={{ background: "#E0E0E0" }}
-        style={navStyle}
-        to="/profile"
-      >
-        Profile
-      </NavLink>
+      {token !== null && (
+        <NavLink
+          activeStyle={{ background: "#E0E0E0" }}
+          style={navStyle}
+          to="/profile"
+        >
+          Profile
+        </NavLink>
+      )}
       {token === null ? (
         <NavLink
           activeStyle={{ background: "#E0E0E0" }}

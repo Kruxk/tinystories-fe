@@ -4,6 +4,7 @@ import { useParams, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { selectUser, selectToken } from "../store/user/selectors";
 import { selectStoryById, selectStories } from "../store/stories/selectors";
+import { editStory } from "../store/stories/actions";
 
 export default function EditStory() {
   const { id } = useParams();
@@ -12,10 +13,14 @@ export default function EditStory() {
   const user = useSelector(selectUser);
   const token = useSelector(selectToken);
   const history = useHistory();
-
   const [name, setName] = useState((story && story.name) || "");
   const [description, setDescription] = useState(story && story.description);
-  console.log(story);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(editStory(id, description, name));
+  };
+
   return (
     <Container>
       <Form>
@@ -41,7 +46,7 @@ export default function EditStory() {
           />
         </Form.Group>
         <Form.Group className="mt-5">
-          <Button variant="dark" type="submit">
+          <Button variant="dark" type="submit" onClick={handleSubmit}>
             Submit Story
           </Button>
         </Form.Group>

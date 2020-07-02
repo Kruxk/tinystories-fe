@@ -2,7 +2,6 @@ import axios from "axios";
 import { apiUrl } from "../../config/constants";
 import { selectStories } from "./selectors";
 import { selectToken, selectUser } from "../user/selectors";
-import Axios from "axios";
 import { getPrompts, getSinglePrompt } from "../prompts/actions";
 import { selectSinglePrompt, selectPrompts } from "../prompts/selectors";
 
@@ -42,7 +41,7 @@ export const getStoriesbyUserId = (userId) => async (dispatch, getState) => {
     dispatch(fetchSucces(storiesFromLocalState));
   } else {
     try {
-      const response = await Axios.get(`${apiUrl}/stories/user/${userId}`);
+      const response = await axios.get(`${apiUrl}/stories/user/${userId}`);
       dispatch(fetchSucces(response.data));
     } catch (e) {
       console.log(e);
@@ -58,7 +57,7 @@ export const postStory = (description, name, promptId, userId) => async (
   if (token === null) return;
 
   try {
-    const response = await Axios.post(
+    const response = await axios.post(
       `${apiUrl}/stories/new`,
       {
         description,
@@ -94,7 +93,7 @@ export const deleteStory = (id) => async (dispatch, getState) => {
 
   if (token === null) return;
   try {
-    const response = await Axios.delete(`${apiUrl}/stories/delete/${id}`, {
+    const response = await axios.delete(`${apiUrl}/stories/delete/${id}`, {
       headers: { Authorization: `Bearer ${token}` },
     });
     console.log("response", response);
@@ -107,5 +106,28 @@ export const deleteStory = (id) => async (dispatch, getState) => {
     }
   } catch (e) {
     console.log(e);
+  }
+};
+
+export const editStory = (id, description, name) => async (
+  dispatch,
+  getState
+) => {
+  const token = selectToken(getState());
+  try {
+    const res = await axios.patch(
+      `${apiUrl}/stories/edit/${id}`,
+      {
+        description,
+        name,
+      },
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
+    console.log("response is: ", res);
+    dispatch(getPrompts());
+  } catch (error) {
+    console.log(error);
   }
 };

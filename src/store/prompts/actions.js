@@ -87,3 +87,15 @@ export const postStory = (description, name, promptId, userId) => async (
     console.log(e);
   }
 };
+
+export const deletePrompt = (id) => async (dispatch, getState) => {
+  const token = selectToken(getState());
+  if (token === null) return;
+  try {
+    //console.log("delete prompt with id", id);
+    const response = await Axios.delete(`${apiUrl}/prompts/delete/${id}`);
+    console.log("response:", response);
+  } catch (e) {
+    console.log(e);
+  }
+};

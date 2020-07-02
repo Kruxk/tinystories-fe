@@ -30,31 +30,39 @@ export const fetchStories = () => async (dispatch, getState) => {
 };
 export const getStoriesbyUserId = (userId) => async (dispatch, getState) => {
   const state = selectPrompts(getState());
-  console.log("state:", state);
-  // if (state.length) {
-  //   const stories = state.map((prompt) => {
-  //     // return  {...prompt.stories} ;
-  //     prompt.stories.forEach((story) => {
-  //       return { ...story };
-  //     });
-  //   });
-  //   //console.log("State has length");
-  //   console.log("stories:", stories);
-  // }
-  try {
-    const response = await Axios.get(`${apiUrl}/stories/user/${userId}`);
-    console.log(" getstoriesbyuserid response is:", response.data);
-    dispatch(fetchSucces(response.data));
-  } catch (e) {
-    console.log(e);
+  if (state.length) {
+    let storiesFromLocalState = [];
+    state.forEach((prompt) => {
+      prompt.stories.forEach((story) => {
+        if (story.userId === userId) {
+          storiesFromLocalState.push({ ...story });
+        }
+      });
+    });
+    dispatch(fetchSucces(storiesFromLocalState));
+  } else {
+    try {
+      const response = await Axios.get(`${apiUrl}/stories/user/${userId}`);
+      dispatch(fetchSucces(response.data));
+    } catch (e) {
+      console.log(e);
+    }
   }
+};
+export const filterStoryFromLocalState = (storyId) => async (
+  dispatch,
+  getState
+) => {
+  const stories = selectStories(getState());
+  const newStories = stories.filter((story) => story.id !== storyId);
+  dispatch(fetchSucces(newStories));
 };
 
 export const deleteStory = (id) => async (dispatch, getState) => {
-  //console.log("deleting story with id:", id);
   const token = selectToken(getState());
   const prompt = selectSinglePrompt(getState());
   const user = selectUser(getState());
+  const stories = selectStories(getState());
 
   if (token === null) return;
   try {
@@ -62,7 +70,11 @@ export const deleteStory = (id) => async (dispatch, getState) => {
     console.log("response", response);
     await dispatch(getPrompts());
     dispatch(getSinglePrompt(prompt.id));
-    dispatch(getStoriesbyUserId(user.id));
+    if (stories.length) {
+      if (stories[0].userId === user.id) {
+        dispatch(filterStoryFromLocalState(id));
+      }
+    }
   } catch (e) {
     console.log(e);
   }

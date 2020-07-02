@@ -15,8 +15,6 @@ export default function Profile() {
     (prompt) => prompt.userId === user.id
   );
   const stories = useSelector(selectStories);
-  console.log("stories", stories);
-  const alternatePrompts = useSelector(selectPrompts);
 
   function test() {
     dispatch(getStoriesbyUserId(user.id));
@@ -25,10 +23,8 @@ export default function Profile() {
   useEffect(() => {
     //dispatch(fetchStories());
     dispatch(getStoriesbyUserId(user.id));
-  }, [dispatch]);
+  }, [dispatch, user.id]);
 
-  // console.log(user);
-  //console.log("prompts:", alternatePrompts);
   const oldRender = () => {
     return (
       <Container>
@@ -70,9 +66,6 @@ export default function Profile() {
     return (
       <Container>
         <Row>
-          {/* <Col>
-            <button onClick={test}>test</button>
-          </Col> */}
           <Col>
             <img
               src="https://picsum.photos/200"

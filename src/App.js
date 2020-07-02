@@ -11,6 +11,7 @@ import WriteStory from "./pages/WriteStory";
 import WritePrompt from "./pages/WritePrompt";
 import ChangeProfilePic from "./pages/ChangeProfilePic";
 import "./App.css";
+import EditStory from "./pages/EditStory";
 import EditPrompt from "./pages/EditPrompt";
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
         <Route path="/prompt/edit/:id" component={EditPrompt} />
         <Route path="/prompt/:id" component={Prompt} />
         <Route path="/write/:id" component={WriteStory} />
+        <Route path="/editstory:id" component={EditStory} />
       </Switch>
     </div>
   );

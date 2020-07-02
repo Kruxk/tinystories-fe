@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { selectUser } from "../../store/user/selectors";
 import { deleteStory } from "../../store/stories/actions";
 import { Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 export default function StoryCard(props) {
   const dispatch = useDispatch();
@@ -17,9 +18,15 @@ export default function StoryCard(props) {
       <h4>Title: {props.name}</h4>
       <p>{props.description}</p>
       {props.userId === user.id ? (
-        <Button variant="dark" onClick={deletePressed}>
-          Delete
-        </Button>
+        <>
+          <Button variant="dark" onClick={deletePressed}>
+            Delete
+          </Button>
+          {` `}
+          <Link to={`/editstory${props.id}`}>
+            <Button variant="dark">Edit</Button>
+          </Link>
+        </>
       ) : (
         ""
       )}

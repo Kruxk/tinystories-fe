@@ -5,7 +5,6 @@ import { selectUser } from "../../store/user/selectors";
 
 export default function PromptCard(props) {
   const user = useSelector(selectUser);
-  //console.log("user", user.id);
   return (
     <div>
       <h1>Title: {props.name}</h1>
@@ -23,6 +22,7 @@ export default function PromptCard(props) {
       ) : (
         " "
       )}
+      {props.userId === user.id ? <button>Delete</button> : ""}
     </div>
   );
 }

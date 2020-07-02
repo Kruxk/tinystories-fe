@@ -1,14 +1,19 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { selectUser } from "../../store/user/selectors";
+import { deletePrompt } from "../../store/prompts/actions";
 
 export default function PromptCard(props) {
+  const dispatch = useDispatch();
   const user = useSelector(selectUser);
-  //console.log("user", user.id);
+  function deletePressed() {
+    dispatch(deletePrompt(props.id));
+  }
+
   return (
     <div>
-      <h1>Title: {props.name}</h1>
+      <h2>Title: {props.name}</h2>
       <p>{props.description}</p>
       <p>
         <i>stories:</i> {props.stories.length}
@@ -22,6 +27,11 @@ export default function PromptCard(props) {
         </Link>
       ) : (
         " "
+      )}
+      {props.userId === user.id ? (
+        <button onClick={deletePressed}>Delete</button>
+      ) : (
+        ""
       )}
     </div>
   );

@@ -2,6 +2,8 @@ import Axios from "axios";
 import { apiUrl } from "../../config/constants";
 import { selectPrompts } from "./selectors";
 import { selectToken } from "../user/selectors";
+import { selectStories } from "../stories/selectors";
+import { filterStoryFromLocalState } from "../stories/actions";
 
 export const storePrompts = (prompts) => ({
   type: "STORE_PROMPTS",
@@ -83,6 +85,29 @@ export const postStory = (description, name, promptId, userId) => async (
       }
     );
     console.log("response is:", response);
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+export const deletePrompt = (id) => async (dispatch, getState) => {
+  const token = selectToken(getState());
+  const stories = selectStories(getState());
+  const storiesToFilter = stories.filter((story) => story.promptId === id);
+  if (token === null) return;
+  //console.log("stories affected:", storiesToFilter);
+  try {
+    //console.log("delete prompt with id", id);
+    const response = await Axios.delete(`${apiUrl}/prompts/delete/${id}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    console.log("response:", response);
+    dispatch(getPrompts());
+    if (stories.length) {
+      storiesToFilter.forEach((story) =>
+        dispatch(filterStoryFromLocalState(story.id))
+      );
+    }
   } catch (e) {
     console.log(e);
   }

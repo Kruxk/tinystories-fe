@@ -1,13 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Form, Button, Container } from "react-bootstrap";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { updatePic } from "../store/user/actions";
 import { useHistory } from "react-router-dom";
+import { selectToken } from "../store/user/selectors";
 
 export default function ChangeProfilePic() {
   const [url, setUrl] = useState("");
   const dispatch = useDispatch();
   const history = useHistory();
+  const token = useSelector(selectToken);
+
+  useEffect(() => {
+    token === null && history.push("/login");
+  });
 
   const handleSubmit = (e) => {
     e.preventDefault();

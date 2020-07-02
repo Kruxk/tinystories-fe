@@ -82,7 +82,7 @@ export const updatePic = (url) => async (dispatch, getState) => {
         headers: { Authorization: `Bearer ${token}` },
       }
     );
-    dispatch(picUpdateSucces(res.data.picture));
+    dispatch(picUpdateSucces(res.data));
   } catch (error) {
     console.log(error);
   }

@@ -1,9 +1,11 @@
 import { apiUrl } from "../../config/constants";
 import axios from "axios";
+import { selectToken } from "./selectors";
 
 export const LOGIN_SUCCES = "LOGIN_SUCCES";
 export const TOKEN_STILL_VALID = "TOKEN_STILL_VALID";
 export const LOG_OUT = "LOG_OUT";
+export const UPDATE_PIC = "UPDATE_PIC";
 
 const loginSucces = (userWithToken) => {
   return {
@@ -12,12 +14,19 @@ const loginSucces = (userWithToken) => {
   };
 };
 
-const tokenStillValid = (userWithoutToken) => {
+const picUpdateSucces = (picture) => {
   return {
-    type: TOKEN_STILL_VALID,
-    payload: userWithoutToken,
+    type: UPDATE_PIC,
+    payload: picture,
   };
 };
+
+// const tokenStillValid = (userWithoutToken) => {
+//   return {
+//     type: TOKEN_STILL_VALID,
+//     payload: userWithoutToken,
+//   };
+// };
 
 export const logOut = () => ({ type: LOG_OUT });
 
@@ -59,4 +68,22 @@ export const login = (email, password) => {
       }
     }
   };
+};
+
+export const updatePic = (url) => async (dispatch, getState) => {
+  const token = selectToken(getState());
+  try {
+    const res = await axios.post(
+      `${apiUrl}/users/picture`,
+      {
+        url,
+      },
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
+    dispatch(picUpdateSucces(res.data));
+  } catch (error) {
+    console.log(error);
+  }
 };

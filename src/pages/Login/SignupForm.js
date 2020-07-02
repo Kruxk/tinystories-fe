@@ -38,6 +38,7 @@ export default function SignupForm() {
         marginLeft: "auto",
         marginRight: "auto",
         marginTop: "1.5em",
+        fontFamily: "Raleway",
       }}
     >
       <Form>

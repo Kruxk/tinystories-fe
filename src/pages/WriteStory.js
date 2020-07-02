@@ -85,7 +85,7 @@ export default function WriteStory() {
   };
 
   return (
-    <Container>
+    <Container style={{ fontFamily: "Raleway" }}>
       <div>
         <h1>Title: {prompt.name}</h1>
         <p>{prompt.description}</p>

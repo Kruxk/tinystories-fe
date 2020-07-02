@@ -37,7 +37,7 @@ export default function Profile() {
     return (
       <Container>
         <div style={{ display: "flex" }}>
-          <button onClick={test}>test</button>
+          {/* <button onClick={test}>test</button> */}
           <div style={{ width: "5em", margin: "0em 1em" }}>
             <img
               style={{ width: "100%" }}
@@ -78,7 +78,7 @@ export default function Profile() {
             <img
               src="https://picsum.photos/200"
               alt="profile"
-              style={{ float: "right" }}
+              style={{ float: "left" }}
             ></img>
           </Col>
           <Col>
@@ -102,5 +102,5 @@ export default function Profile() {
       </Container>
     );
   };
-  return <div>{profileToRender()}</div>;
+  return <div style={{ fontFamily: "Raleway" }}>{profileToRender()}</div>;
 }

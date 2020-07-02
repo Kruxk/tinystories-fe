@@ -56,7 +56,7 @@ export default function WritePrompt() {
           />
         </Form.Group>
         <Form.Group className="mt-5">
-          <Button variant="primary" type="submit" onClick={submitForm}>
+          <Button variant="dark" type="submit" onClick={submitForm}>
             Submit Prompt
           </Button>
         </Form.Group>
@@ -71,7 +71,7 @@ export default function WritePrompt() {
         <p>thanks for submitting your prompt</p>
         <button onClick={anotherPrompt}> Write another prompt </button>
         <Link to={`/`}>
-          <button> See all prompts </button>
+          <Button variant="dark">See all prompts</Button>
         </Link>
       </div>
     );

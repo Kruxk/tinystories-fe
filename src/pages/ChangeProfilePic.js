@@ -28,7 +28,7 @@ export default function ChangeProfilePic() {
           />
         </Form.Group>
         <Form.Group>
-          <Button variant="primary" type="submit" onClick={handleSubmit}>
+          <Button variant="dark" type="submit" onClick={handleSubmit}>
             Submit
           </Button>
         </Form.Group>

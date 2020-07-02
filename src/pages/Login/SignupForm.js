@@ -82,7 +82,7 @@ export default function SignupForm() {
           />
         </Form.Group>
 
-        <Button variant="primary" type="submit" onClick={handleSignup}>
+        <Button variant="dark" type="submit" onClick={handleSignup}>
           Signup
         </Button>
       </Form>

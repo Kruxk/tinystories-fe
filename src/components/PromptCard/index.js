@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { selectUser } from "../../store/user/selectors";
 import { deletePrompt } from "../../store/prompts/actions";
+import { Button } from "react-bootstrap";
 
 export default function PromptCard(props) {
   const dispatch = useDispatch();
@@ -19,17 +20,21 @@ export default function PromptCard(props) {
         <i>stories:</i> {props.stories.length}
       </p>
       <Link to={`/prompt/${props.id}`}>
-        <button>Read</button>
+        <Button variant="dark">Read</Button>
+        {` `}
       </Link>
       {user.id ? (
         <Link to={`/write/${props.id}`}>
-          <button>Write</button>
+          <Button variant="dark">Write</Button>
+          {` `}
         </Link>
       ) : (
         " "
       )}
       {props.userId === user.id ? (
-        <button onClick={deletePressed}>Delete</button>
+        <Button variant="dark" onClick={deletePressed}>
+          Delete
+        </Button>
       ) : (
         ""
       )}

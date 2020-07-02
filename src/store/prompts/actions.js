@@ -95,10 +95,12 @@ export const deletePrompt = (id) => async (dispatch, getState) => {
   const stories = selectStories(getState());
   const storiesToFilter = stories.filter((story) => story.promptId === id);
   if (token === null) return;
-  console.log("stories affected:", storiesToFilter);
+  //console.log("stories affected:", storiesToFilter);
   try {
-    console.log("delete prompt with id", id);
-    const response = await Axios.delete(`${apiUrl}/prompts/delete/${id}`);
+    //console.log("delete prompt with id", id);
+    const response = await Axios.delete(`${apiUrl}/prompts/delete/${id}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
     console.log("response:", response);
     dispatch(getPrompts());
     if (stories.length) {

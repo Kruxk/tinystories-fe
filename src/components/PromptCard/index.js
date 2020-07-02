@@ -13,7 +13,7 @@ export default function PromptCard(props) {
 
   return (
     <div>
-      <h1>Title: {props.name}</h1>
+      <h2>Title: {props.name}</h2>
       <p>{props.description}</p>
       <p>
         <i>stories:</i> {props.stories.length}

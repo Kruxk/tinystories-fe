@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { selectUser, selectToken } from "../store/user/selectors";
-import { Container, Col, Row, Button } from "react-bootstrap";
+import { Container, Col, Row } from "react-bootstrap";
 import { selectPrompts } from "../store/prompts/selectors";
 import { getStoriesbyUserId } from "../store/stories/actions";
 import { selectStories } from "../store/stories/selectors";

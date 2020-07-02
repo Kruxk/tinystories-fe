@@ -2,6 +2,7 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { selectUser } from "../../store/user/selectors";
 import { deleteStory } from "../../store/stories/actions";
+import { Button } from "react-bootstrap";
 
 export default function StoryCard(props) {
   const dispatch = useDispatch();
@@ -16,7 +17,9 @@ export default function StoryCard(props) {
       <h4>Title: {props.name}</h4>
       <p>{props.description}</p>
       {props.userId === user.id ? (
-        <button onClick={deletePressed}> Delete </button>
+        <Button variant="dark" onClick={deletePressed}>
+          Delete
+        </Button>
       ) : (
         ""
       )}

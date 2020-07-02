@@ -78,7 +78,7 @@ export default function WriteStory() {
         <p>thanks for submitting your story</p>
         <button onClick={anotherStory}> Write another story </button>
         <Link to={`/prompt/${id}`}>
-          <button> Go to prompt </button>
+          <Button variant="dark"> Go to prompt </Button>
         </Link>
       </div>
     );

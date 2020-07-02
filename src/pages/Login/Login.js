@@ -60,11 +60,13 @@ export default function Login() {
           />
         </Form.Group>
         <Form.Group>
-          <Button variant="primary" type="submit" onClick={handleLogin}>
+          <Button variant="dark" type="submit" onClick={handleLogin}>
             Login
           </Button>
         </Form.Group>
-        <Link to="/signup">Click here to sign up</Link>
+        <Link to="/signup" style={{ color: "black" }}>
+          Click here to sign up
+        </Link>
       </Form>
     </div>
   );

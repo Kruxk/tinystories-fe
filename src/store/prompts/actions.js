@@ -64,27 +64,25 @@ export const postPrompt = (userId, description, name) => async (
   }
 };
 
-export const postStory = (description, name, promptId, userId) => async (
+export const editPrompt = (id, description, name) => async (
   dispatch,
   getState
 ) => {
   const token = selectToken(getState());
   if (token === null) return;
-
   try {
-    const response = await Axios.post(
-      `${apiUrl}/stories/new`,
+    const response = await Axios.patch(
+      `${apiUrl}/prompts/edit/${id}`,
       {
         description,
         name,
-        promptId,
-        userId,
       },
       {
         headers: { Authorization: `Bearer ${token}` },
       }
     );
-    console.log("response is:", response);
+    console.log("edit response:", response);
+    dispatch(getPrompts());
   } catch (e) {
     console.log(e);
   }
@@ -95,9 +93,7 @@ export const deletePrompt = (id) => async (dispatch, getState) => {
   const stories = selectStories(getState());
   const storiesToFilter = stories.filter((story) => story.promptId === id);
   if (token === null) return;
-  //console.log("stories affected:", storiesToFilter);
   try {
-    //console.log("delete prompt with id", id);
     const response = await Axios.delete(`${apiUrl}/prompts/delete/${id}`, {
       headers: { Authorization: `Bearer ${token}` },
     });

@@ -32,6 +32,13 @@ export default function PromptCard(props) {
         " "
       )}
       {props.userId === user.id ? (
+        <Link to={`prompt/edit/${props.id}`}>
+          <Button variant="dark">Edit</Button>
+        </Link>
+      ) : (
+        ""
+      )}{" "}
+      {props.userId === user.id ? (
         <Button variant="dark" onClick={deletePressed}>
           Delete
         </Button>

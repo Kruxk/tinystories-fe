@@ -66,7 +66,9 @@ export const deleteStory = (id) => async (dispatch, getState) => {
 
   if (token === null) return;
   try {
-    const response = await Axios.delete(`${apiUrl}/stories/delete/${id}`);
+    const response = await Axios.delete(`${apiUrl}/stories/delete/${id}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
     console.log("response", response);
     await dispatch(getPrompts());
     dispatch(getSinglePrompt(prompt.id));

@@ -9,7 +9,7 @@ import SignupForm from "./pages/Login/SignupForm";
 import Prompt from "./pages/Prompt";
 import WriteStory from "./pages/WriteStory";
 import WritePrompt from "./pages/WritePrompt";
-
+import "./App.css";
 
 function App() {
   return (

@@ -14,8 +14,9 @@ const navStyle = {
   textDecoration: "none",
   color: "black",
   borderRadius: "1em",
-  fontFamily: "Roboto",
-  fontWeight: "500",
+  fontSize: "1em",
+  fontFamily: "Lato",
+  // fontWeight: "500",
 };
 
 export default function Navbar() {

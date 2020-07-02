@@ -32,5 +32,9 @@ export default function Prompt() {
     );
   };
 
-  return <div>{Object.keys(prompt).length ? render() : <p>loading</p>}</div>;
+  return (
+    <div style={{ fontFamily: "Raleway" }}>
+      {Object.keys(prompt).length ? render() : <p>loading</p>}
+    </div>
+  );
 }

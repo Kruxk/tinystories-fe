@@ -78,7 +78,7 @@ export default function WritePrompt() {
   };
 
   return (
-    <Container>
+    <Container style={{ fontFamily: "Raleway" }}>
       <h1>Write a prompt</h1>
       {formSubmit ? succesRender() : formToRender()}
     </Container>

@@ -49,6 +49,34 @@ export const getStoriesbyUserId = (userId) => async (dispatch, getState) => {
     }
   }
 };
+
+export const postStory = (description, name, promptId, userId) => async (
+  dispatch,
+  getState
+) => {
+  const token = selectToken(getState());
+  if (token === null) return;
+
+  try {
+    const response = await Axios.post(
+      `${apiUrl}/stories/new`,
+      {
+        description,
+        name,
+        promptId,
+        userId,
+      },
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
+    console.log("response is:", response);
+    dispatch(getPrompts());
+  } catch (e) {
+    console.log(e);
+  }
+};
+
 export const filterStoryFromLocalState = (storyId) => async (
   dispatch,
   getState

@@ -2,9 +2,10 @@ import React, { useEffect, useState } from "react";
 import { Container, Form, Button } from "react-bootstrap";
 import { useParams, useHistory, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getSinglePrompt, postStory } from "../store/prompts/actions";
+import { getSinglePrompt } from "../store/prompts/actions";
 import { selectSinglePrompt } from "../store/prompts/selectors";
 import { selectUser, selectToken } from "../store/user/selectors";
+import { postStory } from "../store/stories/actions";
 
 export default function WriteStory() {
   const { id } = useParams();

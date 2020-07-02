@@ -62,7 +62,7 @@ export default function WriteStory() {
             />
           </Form.Group>
           <Form.Group className="mt-5">
-            <Button variant="primary" type="submit" onClick={submitForm}>
+            <Button variant="dark" type="submit" onClick={submitForm}>
               Submit Story
             </Button>
           </Form.Group>
@@ -76,9 +76,12 @@ export default function WriteStory() {
       <div>
         <h3>Story submitted!</h3>
         <p>thanks for submitting your story</p>
-        <button onClick={anotherStory}> Write another story </button>
+        <Button variant="dark" onClick={anotherStory}>
+          Write another story
+        </Button>
+        {` `}
         <Link to={`/prompt/${id}`}>
-          <Button variant="dark"> Go to prompt </Button>
+          <Button variant="dark">Go to prompt</Button>
         </Link>
       </div>
     );

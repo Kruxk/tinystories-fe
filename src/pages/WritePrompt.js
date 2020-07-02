@@ -69,7 +69,10 @@ export default function WritePrompt() {
       <div>
         <h3>Prompt submitted!</h3>
         <p>thanks for submitting your prompt</p>
-        <button onClick={anotherPrompt}> Write another prompt </button>
+        <Button variant="dark" onClick={anotherPrompt}>
+          Write another prompt
+        </Button>
+        {` `}
         <Link to={`/`}>
           <Button variant="dark">See all prompts</Button>
         </Link>

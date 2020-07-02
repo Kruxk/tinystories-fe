@@ -12,7 +12,7 @@ export default (state = initialState, { type, payload }) => {
     case LOGIN_SUCCES:
       return { ...state, ...payload };
     case LOG_OUT:
-      return { ...state, token: null };
+      return { ...initialState };
     default:
       return state;
   }

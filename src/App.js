@@ -9,6 +9,7 @@ import SignupForm from "./pages/Login/SignupForm";
 import Prompt from "./pages/Prompt";
 import WriteStory from "./pages/WriteStory";
 import WritePrompt from "./pages/WritePrompt";
+import ChangeProfilePic from "./pages/ChangeProfilePic";
 import "./App.css";
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
       <Navbar />
       <Switch>
         <Route exact path="/" component={Home} />
+        <Route exact path="/profile/changepic" component={ChangeProfilePic} />
         <Route path="/profile" component={Profile} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={SignupForm} />

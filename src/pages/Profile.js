@@ -3,11 +3,11 @@ import { useSelector, useDispatch } from "react-redux";
 import { selectUser, selectToken } from "../store/user/selectors";
 import { Container, Col, Row, Button } from "react-bootstrap";
 import { selectPrompts } from "../store/prompts/selectors";
-import { fetchStories, getStoriesbyUserId } from "../store/stories/actions";
+import { getStoriesbyUserId } from "../store/stories/actions";
 import { selectStories } from "../store/stories/selectors";
 import StoryCard from "../components/StoryCard";
 import PromptCard from "../components/PromptCard";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import PencilIcon from "../components/PencilIcon";
 
 export default function Profile() {
@@ -35,26 +35,26 @@ export default function Profile() {
       <Container>
         <Row>
           <Row>
-            <Col style={{ maxWidth: "8em" }}>
+            <Col style={{ maxWidth: "8em", maxHeight: "3.75em" }}>
               <img
-                src="https://picsum.photos/200"
+                src={user.picture}
                 alt="profile"
-                style={{ width: "100%", borderRadius: "50%" }}
+                style={{ width: "100%", height: "100%", borderRadius: "50%" }}
               />
             </Col>
             <Col
               style={{ position: "relative", left: "-1.9em", bottom: "-2em" }}
             >
-              <Button variant="primary" style={{ borderRadius: "50%" }}>
+              <Link to="/profile/changepic">
                 <PencilIcon />
-              </Button>
+              </Link>
             </Col>
           </Row>
           <Col>
             <h1>{user.name}</h1>
           </Col>
         </Row>
-        <Row>
+        <Row style={{ marginTop: "2em" }}>
           <Col>
             <h4>My prompts</h4>
             {prompts.map((prompt) => (

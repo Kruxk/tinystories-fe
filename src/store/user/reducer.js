@@ -1,4 +1,4 @@
-import { LOG_OUT, LOGIN_SUCCES } from "./actions";
+import { LOG_OUT, LOGIN_SUCCES, UPDATE_PIC } from "./actions";
 
 const initialState = {
   token: null,
@@ -11,6 +11,8 @@ export default (state = initialState, { type, payload }) => {
   switch (type) {
     case LOGIN_SUCCES:
       return { ...state, ...payload };
+    case UPDATE_PIC:
+      return { ...state, picture: payload };
     case LOG_OUT:
       return { ...state, token: null };
     default:

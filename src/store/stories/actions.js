@@ -1,10 +1,10 @@
 import axios from "axios";
 import { apiUrl } from "../../config/constants";
 import { selectStories } from "./selectors";
-import { selectToken } from "../user/selectors";
+import { selectToken, selectUser } from "../user/selectors";
 import Axios from "axios";
 import { getPrompts, getSinglePrompt } from "../prompts/actions";
-import { selectSinglePrompt } from "../prompts/selectors";
+import { selectSinglePrompt, selectPrompts } from "../prompts/selectors";
 
 export const STORE_STORIES = "STORE_STORIES";
 
@@ -28,11 +28,33 @@ export const fetchStories = () => async (dispatch, getState) => {
     console.log(error);
   }
 };
+export const getStoriesbyUserId = (userId) => async (dispatch, getState) => {
+  const state = selectPrompts(getState());
+  console.log("state:", state);
+  // if (state.length) {
+  //   const stories = state.map((prompt) => {
+  //     // return  {...prompt.stories} ;
+  //     prompt.stories.forEach((story) => {
+  //       return { ...story };
+  //     });
+  //   });
+  //   //console.log("State has length");
+  //   console.log("stories:", stories);
+  // }
+  try {
+    const response = await Axios.get(`${apiUrl}/stories/user/${userId}`);
+    console.log(" getstoriesbyuserid response is:", response.data);
+    dispatch(fetchSucces(response.data));
+  } catch (e) {
+    console.log(e);
+  }
+};
 
 export const deleteStory = (id) => async (dispatch, getState) => {
   //console.log("deleting story with id:", id);
   const token = selectToken(getState());
   const prompt = selectSinglePrompt(getState());
+  const user = selectUser(getState());
 
   if (token === null) return;
   try {
@@ -40,6 +62,7 @@ export const deleteStory = (id) => async (dispatch, getState) => {
     console.log("response", response);
     await dispatch(getPrompts());
     dispatch(getSinglePrompt(prompt.id));
+    dispatch(getStoriesbyUserId(user.id));
   } catch (e) {
     console.log(e);
   }

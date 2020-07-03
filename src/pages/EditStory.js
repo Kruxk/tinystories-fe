@@ -1,28 +1,36 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Form, Button, Container } from "react-bootstrap";
-import { useParams, useHistory } from "react-router-dom";
+import { useParams, useHistory, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { selectUser, selectToken } from "../store/user/selectors";
-import { selectStoryById, selectStories } from "../store/stories/selectors";
+import { selectToken } from "../store/user/selectors";
+import { selectStoryById } from "../store/stories/selectors";
 import { editStory } from "../store/stories/actions";
 
 export default function EditStory() {
   const { id } = useParams();
   const dispatch = useDispatch();
   const story = useSelector(selectStoryById(id));
-  const user = useSelector(selectUser);
   const token = useSelector(selectToken);
   const history = useHistory();
   const [name, setName] = useState((story && story.name) || "");
   const [description, setDescription] = useState(story && story.description);
+  const [formSubmit, setFormSubmit] = useState(false);
+
+  useEffect(() => {
+    if (token === null) {
+      history.push("/login");
+    }
+  }, [dispatch, history, token]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(editStory(id, description, name));
+
+    setFormSubmit(true);
   };
 
-  return (
-    <Container>
+  const FormToRender = () => {
+    return (
       <Form>
         <Form.Group controlId="formBasicName">
           <Form.Label>Title of your Story:</Form.Label>
@@ -51,6 +59,26 @@ export default function EditStory() {
           </Button>
         </Form.Group>
       </Form>
+    );
+  };
+
+  const SuccesRender = () => {
+    return (
+      <div>
+        <h3>Story Edited!</h3>
+        <p> Your Story is now up to date</p>
+        {` `}
+        <Link to={`/prompt/${story.promptId}`}>
+          <Button variant="dark">See your Story</Button>
+        </Link>
+      </div>
+    );
+  };
+
+  return (
+    <Container style={{ fontFamily: "Raleway" }}>
+      <h1>Edit your story</h1>
+      {formSubmit ? <SuccesRender /> : <FormToRender />}
     </Container>
   );
 }

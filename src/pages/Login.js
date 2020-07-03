@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Form, Button } from "react-bootstrap";
 import { Link, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { login } from "../../store/user/actions";
-import { selectToken } from "../../store/user/selectors";
+import { login } from "../store/user/actions";
+import { selectToken } from "../store/user/selectors";
 
 export default function Login() {
   const [email, setEmail] = useState("");

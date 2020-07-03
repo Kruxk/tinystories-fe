@@ -29,7 +29,7 @@ export default function EditStory() {
     setFormSubmit(true);
   };
 
-  const FormToRender = () => {
+  const formToRender = () => {
     return (
       <Form>
         <Form.Group controlId="formBasicName">
@@ -62,7 +62,7 @@ export default function EditStory() {
     );
   };
 
-  const SuccesRender = () => {
+  const succesRender = () => {
     return (
       <div>
         <h3>Story Edited!</h3>
@@ -78,7 +78,7 @@ export default function EditStory() {
   return (
     <Container style={{ fontFamily: "Raleway" }}>
       <h1>Edit your story</h1>
-      {formSubmit ? <SuccesRender /> : <FormToRender />}
+      {formSubmit ? succesRender() : formToRender()}
     </Container>
   );
 }

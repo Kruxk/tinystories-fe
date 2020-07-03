@@ -4,6 +4,7 @@ import { selectUser } from "../../store/user/selectors";
 import { deleteStory } from "../../store/stories/actions";
 import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import "../styling.css";
 
 export default function StoryCard(props) {
   const dispatch = useDispatch();
@@ -14,19 +15,19 @@ export default function StoryCard(props) {
   }
 
   return (
-    <div>
+    <div className="card">
       <h4>Title: {props.name}</h4>
       <p>{props.description}</p>
       {props.userId === user.id ? (
-        <>
-          <Button variant="dark" onClick={deletePressed}>
-            Delete
-          </Button>
-          {` `}
+        <div>
           <Link to={`/editstory${props.id}`}>
             <Button variant="dark">Edit</Button>
           </Link>
-        </>
+          {` `}
+          <Button variant="dark" onClick={deletePressed}>
+            Delete
+          </Button>
+        </div>
       ) : (
         ""
       )}

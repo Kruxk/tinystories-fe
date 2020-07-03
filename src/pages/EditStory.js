@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Form, Button, Container } from "react-bootstrap";
 import { useParams, useHistory, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { selectUser, selectToken } from "../store/user/selectors";
+import { selectToken } from "../store/user/selectors";
 import { selectStoryById } from "../store/stories/selectors";
 import { editStory } from "../store/stories/actions";
 

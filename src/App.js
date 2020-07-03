@@ -1,11 +1,11 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
 import Home from "./pages/Home";
-import Login from "./pages/Login/Login";
+import Login from "./pages/Login";
 import Profile from "./pages/Profile";
 import Navbar from "./components/Navbar";
 import "bootstrap/dist/css/bootstrap.min.css";
-import SignupForm from "./pages/Login/SignupForm";
+import SignupForm from "./pages/SignupForm";
 import Prompt from "./pages/Prompt";
 import WriteStory from "./pages/WriteStory";
 import WritePrompt from "./pages/WritePrompt";

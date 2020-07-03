@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Form, Button } from "react-bootstrap";
-import { signUp } from "../../store/user/actions";
+import { signUp } from "../store/user/actions";
 import { useDispatch, useSelector } from "react-redux";
-import { selectToken } from "../../store/user/selectors";
+import { selectToken } from "../store/user/selectors";
 import { useHistory } from "react-router-dom";
 
 export default function SignupForm() {

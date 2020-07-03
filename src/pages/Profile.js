@@ -34,35 +34,44 @@ export default function Profile() {
     return (
       <Container>
         <Row>
-          <Row>
-            <Col style={{ maxWidth: "8em", maxHeight: "3.75em" }}>
+          <Col xs={3}>
+            <div
+              style={{
+                textAlign: "center",
+                display: "flex",
+              }}
+            >
               <img
                 src={user.picture}
                 alt="profile"
-                style={{ width: "100%", height: "100%", borderRadius: "50%" }}
+                style={{
+                  width: "100%",
+                  marginRight: "5px",
+                }}
               />
-            </Col>
-            <Col
-              style={{ position: "relative", left: "-1.9em", bottom: "-2em" }}
-            >
               <Link to="/profile/changepic">
                 <PencilIcon />
               </Link>
-            </Col>
-          </Row>
-          <Col>
-            <h1>{user.name}</h1>
+            </div>
+          </Col>
+          <Col style={{ display: "flex", alignItems: "center" }}>
+            <div>
+              <h2>Welcome:</h2>
+              <h1>
+                <b>{user.name}</b>
+              </h1>
+            </div>
           </Col>
         </Row>
         <Row style={{ marginTop: "2em" }}>
           <Col>
-            <h4>My prompts</h4>
+            <h2>My prompts</h2>
             {prompts.map((prompt) => (
               <PromptCard key={prompt.id} {...prompt} />
             ))}
           </Col>
           <Col>
-            <h4>My stories</h4>
+            <h2>My stories</h2>
             {stories.map((story) => (
               <StoryCard key={story.id} {...story} />
             ))}

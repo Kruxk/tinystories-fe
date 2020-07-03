@@ -19,7 +19,7 @@ export default function Prompt() {
     return (
       <Container>
         <div>
-          <h3>Writing prompt: {prompt.name}</h3>
+          <h1>Writing prompt: {prompt.name}</h1>
           <p>{prompt.description}</p>
           {prompt.stories.map((story) => (
             <StoryCard key={story.id} {...story} />

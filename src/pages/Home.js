@@ -17,6 +17,9 @@ export default function Home() {
     prompts.map((prompt) => <PromptCard key={prompt.id} {...prompt} />);
 
   return (
-    <Container style={{ fontFamily: "Raleway" }}>{promptsToRender()}</Container>
+    <Container style={{ fontFamily: "Raleway" }}>
+      <h1>Pick your prompt:</h1>
+      {promptsToRender()}
+    </Container>
   );
 }
